@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weather_id: 1
+  name: MyString
+  state: MyString
+  country: MyString
+  lon: 1.5
+  lat: 1.5
+
+two:
+  weather_id: 1
+  name: MyString
+  state: MyString
+  country: MyString
+  lon: 1.5
+  lat: 1.5
