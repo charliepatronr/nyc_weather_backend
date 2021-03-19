@@ -8,24 +8,16 @@ class CitiesController < ApplicationController
         cities.each do |city|
             target = {}
             target["city"] = city.attributes
-            api = WeatherApi.new(city.weather_id)
+            api = WeatherApi.new(city)
             response = api.query
             target["city"]["weather"] = response
             final << target
         end
         render json: final
 
-        
-
         # call api on load to have all the data and use it on the front end
 
-
-
-
-        
     end 
-
-
 
     def weather  
         city = City.find(params[:id])
