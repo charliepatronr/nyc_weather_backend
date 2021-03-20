@@ -11,7 +11,7 @@ class WeatherApi
 
     # BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
     BASE_URL="https://api.openweathermap.org/data/2.5/onecall?"
-    APIkey = "086aeada9ac2c944d814b61e05ae3888"
+    APIkey = ENV["OPEN_WEATHER_API_KEY"]
     API_PARTIAL_URL = "&appid=#{APIkey}&units=imperial"
 
 
