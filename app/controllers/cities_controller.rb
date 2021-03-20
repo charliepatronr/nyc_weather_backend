@@ -10,8 +10,20 @@ class CitiesController < ApplicationController
             target["city"] = city.attributes
             api = WeatherApi.new(city)
             response = api.query
-            target["city"]["weather"] = response
-            final << target
+            puts response
+
+            if response[:code] != 200
+                payload = {
+                    error: "Error calling Open Weather API", 
+                    code: response[:code]
+                }
+                return render :json => payload, :status => :bad_request
+                # return render json: response
+            else 
+                target["city"]["weather"] = response
+                final << target
+            end 
+
         end
         render json: final
 
