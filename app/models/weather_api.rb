@@ -11,13 +11,24 @@ class WeatherApi
 
     # BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
     BASE_URL="https://api.openweathermap.org/data/2.5/onecall?"
-    APIkey = "086aeada9ac2c944d814b61e05ae3888"
-    API_PARTIAL_URL = "&appid=#{APIkey}&units=imperial"
+    API_key = ENV["OPEN_WEATHER_API_KEY"]
+    # API_key = "no"
+    API_PARTIAL_URL = "&appid=#{API_key}&units=imperial"
 
 
     def query
         request = HTTParty.get(BASE_URL+@lat_lon+API_PARTIAL_URL)
-        @request_hash = request.parsed_response
+        if request.code != 200 
+            puts request.code
+            @request_hash = {
+                code: request.code
+            }
+        else 
+            @request_hash = request.parsed_response
+            @request_hash[:code] = request.code
+        end 
+
+        @request_hash
 
     end 
 

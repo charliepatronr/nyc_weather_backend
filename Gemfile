@@ -5,6 +5,7 @@ ruby '2.6.1'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'httparty', '~> 0.13.7'
 gem 'json'
+gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
