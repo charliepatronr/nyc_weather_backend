@@ -21,6 +21,7 @@ class WeatherApi
         if request.code != 200 
             puts request.code
             @request_hash = {
+                error: "Error calling Open Weather API", 
                 code: request.code
             }
         else 
@@ -32,9 +33,9 @@ class WeatherApi
 
     end 
 
-    def initialize(city)
+    def initialize(lat, lon)
         # @search_city =  "id=#{city}"
-        @lat_lon= "lat=#{city.lat}&lon=#{city.lon}&exclude=minutely,hourly"
+        @lat_lon= "lat=#{lat}&lon=#{lon}&exclude=minutely,hourly"
     end 
 
 

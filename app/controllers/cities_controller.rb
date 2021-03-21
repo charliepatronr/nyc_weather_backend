@@ -8,17 +8,17 @@ class CitiesController < ApplicationController
         cities.each do |city|
             target = {}
             target["city"] = city.attributes
-            api = WeatherApi.new(city)
+            api = WeatherApi.new(city.lat, city.lon)
             response = api.query
             puts response
 
             if response[:code] != 200
-                payload = {
-                    error: "Error calling Open Weather API", 
-                    code: response[:code]
-                }
-                return render :json => payload, :status => :bad_request
-                # return render json: response
+                # payload = {
+                #     error: "Error calling Open Weather API", 
+                #     code: response[:code]
+                # }
+                # return render :json => payload, :status => :bad_request
+                return render json: response
             else 
                 target["city"]["weather"] = response
                 final << target
@@ -31,20 +31,23 @@ class CitiesController < ApplicationController
 
     end 
 
-    def weather  
-        city = City.find(params[:id])
+    def marker  
+        lat = params[:lat]
+        lon = params[:lon]
+        api = WeatherApi.new(lat, lon)
+        response = api.query
+        puts response
 
-        # render json: city, include: '*.*'
-        
+        if response[:code] != 200
+            payload = {
+                error: "Error calling Open Weather API", 
+                code: response[:code]
+            }
+        else 
+            payload = response
+        end
 
-        # call external weather api with city id 
-        api = WeatherApi.new(city.weather_id)
-        target = api.query
-        render json: target
-        # render json weather id
-
-
-
+        render json: payload
 
     end
 
